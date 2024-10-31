@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+     <meta name="csrf-token" content="{{ csrf_token }}">
+
+</head>
+<body>
+<link rel="stylesheet" href="../static/plugins/bootstrap-5.3.3-dist/css/bootstrap.css">
+<script src="../static/js/jquery-3.7.1.min.js"></script>
+<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/styles.css">
+
+<!--导航栏-->
+<nav class="navbar navbar-expand-lg" style="background-color: #003865;">
+    <div class="container-fluid">
+
+        <a class="navbar-brand pt-2" href="#" style="color: white">
+            <img src="{% static 'img/brand.png' %}" class="img-fluid" style="width: 35px; height: 35px;" alt="">
+            EVSS
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 pt-2 pb-2 justify-content-center w-100 d-flex">
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}"
+                       style="color: white">Home</a>
+                </li>
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link" href="{% url 'rent_page' %}" style="color: white">Vehicles Rent</a>
+                </li>
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link" href="#" style="color: white">About us</a>
+                </li>
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link" href="#" style="color: white">Help</a>
+                </li>
+                <li class="ps-md-5">
+                    <button type="button" class="btn btn-light me-5" id="liveToastBtn">Contact us</button>
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header" style="background-color: #00d9b2; color: white;">
+                                <img src="../static/img/customer%20service.jpg" style="width: 20px; height: 20px;"
+                                     class="rounded me-2" alt="...">
+                                <strong class="me-auto">customer service</strong>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body" style="color: black">
+                                Hello, if you have any questions, feel free to call <span style="color: green">+44 123454321</span>
+                                or send an email to <span style="color: green">evssbest@gmail.com</span>.
+                                We will contact you within three business days.
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle me-3" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <img src="{% static 'img/profile.jpg' %}" alt="User Avatar" class="rounded-circle"
+                 style="width: 35px; height: 35px;">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="card text-center" style="margin-top: 71px">
+    <div class="card-header" style="font-size: x-large">
+
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Type</th>
+                <th scope="col">Price(per hour)</th>
+            </tr>
+            </thead>
+            {% for price in vehicle_pricing %}
+                <tbody>
+                <tr class="table-dark">
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ price.vehicle_type }}</td>
+                    <td>{{ price.price_per_hour|floatformat:0 }}£</td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+
+{#手风琴#}
+<div class="accordion accordion-flush" id="accordionExample">
+    {% for station, vehicles in station_vehicles.items %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                        aria-controls="collapse{{ forloop.counter }}">
+                    {{ station.station_name }}
+                </button>
+            </h2>
+            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <table class="table table-hover table-striped" id="vehicle-list">
+                        <thead class="table-primary">
+                        <tr>
+                            <th scope="col">Vehicle ID</th>
+                            <th scope="col">Vehicle Type</th>
+                            <th scope="col">Battery Percentage</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 遍历每个站点下的车辆 -->
+                        {% for vehicle in vehicles %}
+                            <tr id="vehicle-row-{{ vehicle.vehicle_id }}">
+                                <th scope="row">{{ vehicle.vehicle_id }}</th> <!-- 车辆 ID -->
+                                <td>{{ vehicle.vehicle_type }}</td> <!-- 车辆类型，如 scooter, bike -->
+                                <td>{{ vehicle.battery_percentage }}%</td> <!-- 电池百分比 -->
+                                <td>{{ vehicle.vehicle_status }}</td> <!-- 车辆状态 -->
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success rent-btn" data-bs-toggle="modal"
+                                            data-bs-target="#rentModal{{ vehicle.vehicle_id }}" data-vehicle-id="{{ vehicle.vehicle_id }}"
+                                    style="margin-left: 10px">
+                                        Rent
+                                    </button>
+
+                                    <!-- 确认弹出框 -->
+                                    <div class="modal fade" id="rentModal{{ vehicle.vehicle_id }}"
+                                         data-bs-backdrop="static"
+                                         data-bs-keyboard="false" tabindex="-1"
+                                         aria-labelledby="rentModalLabel{{ vehicle.vehicle_id }}"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5"
+                                                        id="rentModalLabel{{ vehicle.vehicle_id }}">
+                                                        Rent Confirmation
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to rent this {{ vehicle.vehicle_type }}
+                                                    (ID: {{ vehicle.vehicle_id }})?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">No
+                                                    </button>
+                                                    <!-- 修改后可添加功能处理的按钮 -->
+                                                    <button type="button" class="btn btn-primary confirm-rent"
+                                                            onclick="window.location.href='{% url 'time_page' %}'"
+                                                    data-vehicle-id="{{ vehicle.vehicle_id }}">
+                                                        Yes
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    //租车
+   document.querySelectorAll('.confirm-rent').forEach(button => {
+    button.addEventListener('click', function () {
+        const vehicleId = this.getAttribute('data-vehicle-id');  // 获取车辆 ID
+        const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');  // 获取 CSRF token
+
+        // 发送 AJAX 请求到后端更新车辆状态
+        fetch(`/rent_vehicle/${vehicleId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,  // 将 CSRF token 添加到请求头中
+            },
+            body: JSON.stringify({
+                vehicle_id: vehicleId  // 传递车辆 ID
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // 成功后将车辆从页面隐藏
+                document.querySelector(`#vehicle-row-${vehicleId}`).remove();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+
+</script>
+
+
+<script>
+    //车辆订单
+    document.querySelectorAll('.confirm-rent').forEach(button => {
+        button.addEventListener('click', function () {
+            const vehicleId = this.getAttribute('data-vehicle-id');  // 获取车辆 ID
+            const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch(`/create_rental/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({ vehicle_id: vehicleId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Rental created successfully!');
+                    window.location.href = "{% url 'time_page' %}";
+                } else {
+                    alert('Failed to create rental: ' + data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
+
+
+
+</body>
+
+
+<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+<script>// JavaScript to trigger the toast
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+    })
+}
+</script>
+</html>

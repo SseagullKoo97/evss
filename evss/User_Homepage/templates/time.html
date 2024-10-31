@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timer</title>
+    <link rel="stylesheet" href="../static/css/time.css">
+    <link rel="stylesheet" href="../static/plugins/bootstrap-5.3.3-dist/css/bootstrap.css">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    {#    <script src="../static/js/jquery-3.7.1.min.js"></script>#}
+    {#    <script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>#}
+    <style>
+        #timer {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+    </style>
+
+
+
+</head>
+
+<body style="background-color: black">
+<div class="timer-container">
+    <h1>You have ridden for</h1>
+    <div id="timer">00:00:00</div>
+    <div style="margin-top: 20px;">
+        <button type="button" class="btn btn-lg btn-danger" id="drop-btn"
+                data-vehicle-id="{{ vehicle.vehicle_id }}" onclick="window.location.href='{% url 'rent_page' %}';">Drop</button>
+
+    </div>
+</div>
+<script src="../static/js/script.js"></script>
+
+
+{#<script>#}
+{#    document.querySelectorAll('.drop-btn').forEach(button => {#}
+{#    button.addEventListener('click', function () {#}
+{#        const vehicleId = this.getAttribute('data-vehicle-id');  // 获取车辆 ID#}
+{#        const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');  // 获取 CSRF token#}
+{##}
+{#        // 发送 AJAX 请求到后端更新车辆状态为 'available'#}
+{#        fetch(`/drop_vehicle/${vehicleId}/`, {#}
+{#            method: 'POST',#}
+{#            headers: {#}
+{#                'Content-Type': 'application/json',#}
+{#                'X-CSRFToken': csrftoken,  // 将 CSRF token 添加到请求头中#}
+{#            },#}
+{#            body: JSON.stringify({#}
+{#                vehicle_id: vehicleId  // 传递车辆 ID#}
+{#            }),#}
+{#        })#}
+{#        .then(response => response.json())#}
+{#        .then(data => {#}
+{#            if (data.status === 'success') {#}
+{#                // 成功后将车辆重新显示在页面#}
+{#                location.reload();  // 刷新页面以显示车辆#}
+{#            } else {#}
+{#                alert(data.message);#}
+{#            }#}
+{#        })#}
+{#        .catch(error => {#}
+{#            console.error('Error:', error);#}
+{#        });#}
+{#    });#}
+{#});#}
+{#</script>#}
+
+
+</body>
+</html>
+

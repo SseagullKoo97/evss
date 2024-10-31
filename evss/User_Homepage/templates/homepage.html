@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link rel="stylesheet" href="../static/plugins/bootstrap-5.3.3-dist/css/bootstrap.css">
+<script src="../static/js/jquery-3.7.1.min.js"></script>
+<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../static/css/styles.css">
+<!--轮播主图-->
+<div id="carouselExample" class="carousel slide" style="position: relative; margin-top: 70px;">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'img/banner.jpg' %}" class="img-fluid"
+                 style="width: 100%; height: 900px;object-fit: cover" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/pexels-photo-1503538.png' %}" class="img-fluid d-block w-100"
+                 style="width: 100%; height: 900px;object-fit: cover" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/pexels-centre-for-ageing-better-55954677-21405596.jpg' %}"
+                 class="img-fluid d-block w-100" style="width: 100%; height: 900px;object-fit: cover" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!--主图文字-->
+<div class="home__banner" style="position: absolute; top: 56%; left: 37%; transform: translate(-50%, -50%);">
+    <p class="home__banner--text banner__text--green">Ride Green</p>
+    <p class="home__banner--text">Let sustainable travel</p>
+    <p class="home__banner--text">Connect U to a better life</p>
+</div>
+
+<!--导航栏-->
+<nav class="navbar navbar-expand-lg" style="background-color: #003865;" >
+    <div class="container-fluid">
+
+        <a class="navbar-brand pt-2" href="#" style="color: white">
+            <img src="{% static 'img/brand.png' %}" class="img-fluid" style="width: 35px; height: 35px;" alt="">
+            EVSS
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 pt-2 pb-2 justify-content-center w-100 d-flex">
+                <li class="nav-item ps-md-5" >
+                    <a class="nav-link active" aria-current="page" href="#" style="color: white">Home</a>
+                </li>
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link" href="{% url 'rent_page' %}" style="color: white">Vehicles Rent</a>
+                </li>
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link" href="#" style="color: white">About us</a>
+                </li>
+                <li class="nav-item ps-md-5">
+                    <a class="nav-link" href="#" style="color: white">Help</a>
+                </li>
+                <li class="ps-md-5">
+                    <button type="button" class="btn btn-light me-5" id="liveToastBtn">Contact us</button>
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header" style="background-color: #00d9b2; color: white;">
+                                <img src="../static/img/customer%20service.jpg" style="width: 20px; height: 20px;"
+                                     class="rounded me-2" alt="...">
+                                <strong class="me-auto">customer service</strong>
+
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body" style="color: black">
+                                Hello, if you have any questions, feel free to call <span style="color: green">+44 123454321</span>
+                                or send an email to <span style="color: green">evssbest@gmail.com</span>.
+                                We will contact you within three business days.
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle me-3" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            <img src="{% static 'img/profile.jpg' %}" alt="User Avatar" class="rounded-circle"
+                 style="width: 35px; height: 35px;">
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+    </div>
+
+
+</nav>
+
+
+<div class="image-container" style="position: relative;margin:0;padding: 0;box-sizing: border-box;">
+    <!-- 第一张背景图片 -->
+    <img src="{% static 'img/GhjagQDyvk1611559774971.png' %}" style="width: 100%; height: auto; display: block" alt="">
+
+    <!-- 文字 -->
+    <div class="home__body--title" style="position: absolute; top: 8%; left: 12%; transform: translate(-50%, -50%);">
+        <div class="home__body--title-text" style="color: black; font-size: 50px;">Our vehicles</div>
+    </div>
+
+    <!-- 第二、第三张图片 -->
+    <div class="image-overlay-container"
+         style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; gap: 20px;">
+        <!-- 第二张图片 -->
+        <div class="image-wrapper" style="position: relative;">
+            <img src="{% static 'img/electric-bike.png' %}" alt="" class="body--business-bg business-img--one"
+                 style="width: 600px; height: 420px; transform: translate(0, 30%)">
+            <!-- 遮罩层 -->
+            <div class="image-overlay"></div>
+            <!-- 左下角文本 -->
+            <div class="image-text"
+                 style="position: absolute; bottom: 3px; left: 10px; color: black; font-size: 24px; font-weight: bold">
+                Electric Bike
+            </div>
+        </div>
+
+        <!-- 第三张图片 -->
+        <div class="image-wrapper" style="position: relative;">
+            <img src="{% static 'img/ElectricScooter.png' %}" alt="" class="body--business-bg business-img--two"
+                 style="width: 600px; height: 600px;">
+            <!-- 遮罩层 -->
+            <div class="image-overlay"></div>
+            <!-- 左下角文本 -->
+            <div class="image-text"
+                 style="position: absolute; bottom: 3px; left: 10px; color: black; font-size: 24px; font-weight: bold">
+                Electric Scooter
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="image-container"
+     style="position: relative; margin-top: -5px;padding: 0; box-sizing: border-box; display: inline-block;width: 100%">
+    <!-- 第一张背景图片 -->
+    <img src="{% static 'img/GhjagQDyvk1611559774971.png' %}" style="width: 100%; height: auto; display: block" alt="">
+
+    <!-- 文字 -->
+    <div class="home__body--title" style="position: absolute; top: 8%; left: 12%; transform: translate(-50%, -50%);">
+        <div class="home__body--title-text" style="color: black; font-size: 50px;">How to rent</div>
+    </div>
+
+    {#步骤#}
+    <div class="row row-cols-1 row-cols-md-3 g-4"
+         style="position: absolute;top: 10%; left: 50%; transform: translate(-50%, 0); width: 100%; padding: 20px;">
+        <div class="col">
+            <div class="card">
+                <img src="{% static 'img/locate.jpg' %}" class="card-img-top" alt="..."
+                     style="width: 100%; height: auto;">
+                <div class="card-body">
+                    <h4 class="card-title" style="color:#00d9b2;font-weight: bold">Locate</h4>
+                    <p class="card-text">Select a rental area based on your location and view all available vehicles in that area.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{% static 'img/battery.png' %}" class="card-img-top" alt="..." style="width: 100%; height: 300px;">
+                <div class="card-body">
+                    <h4 class="card-title" style="color:#00d9b2;font-weight: bold">Select</h4>
+                    <p class="card-text">Select from the available vehicles near you, as recommended by the system.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="../static/img/ride.jpg" class="card-img-top" alt="..." style="width: 100%; height: 280px;">
+                <div class="card-body">
+                    <h4 class="card-title" style="color:#00d9b2;font-weight: bold">Ride</h4>
+                    <p class="card-text">Follow all traffic rules, stick to the streets and bike lanes where legally
+                        permitted.</p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2" style="position: absolute;top: 75%; width: 100%;">
+        <a class="btn btn-outline-success py-4 " href="{% url 'rent_page' %}">Get start to your trip!</a>
+    </div>
+</div>
+
+
+<footer class="bg-dark text-white text-center py-4" style="margin-top: -5px">
+    <div class="container">
+        <p>&copy; 2024 EVSS. All Rights Reserved.</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#" class="text-white">Facebook</a></li>
+            <li class="list-inline-item"><a href="#" class="text-white">Twitter</a></li>
+            <li class="list-inline-item"><a href="#" class="text-white">Instagram</a></li>
+        </ul>
+    </div>
+</footer>
+
+
+
+
+
+
+</body>
+<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+<script>// JavaScript to trigger the toast
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    toastTrigger.addEventListener('click', () => {
+        toastBootstrap.show()
+    })
+}
+</script>
+</html>

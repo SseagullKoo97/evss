@@ -1,0 +1,25 @@
+/*计时器*/
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #282c34;
+    font-family: 'Arial', sans-serif;
+}
+
+.timer-container {
+    text-align: center;
+    color: #61dafb;
+    border: 2px solid #61dafb;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+#timer {
+    font-size: 48px;
+    margin-top: 20px;
+}

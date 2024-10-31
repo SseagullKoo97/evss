@@ -1,0 +1,122 @@
+.home__banner .banner__text--green {
+    color: #00d9b2;
+}
+
+.home__banner--text {
+    color: #e5e6e7;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 4.58333vw;
+    line-height: 5.72917vw;
+}
+
+.home__body--title {
+    margin-bottom: 3.75vw;
+}
+
+.home__body--title-sub {
+    font-family: sans-serif;
+    font-size: 1.66667vw;
+    font-weight: 400;
+    color: #19252e;
+    letter-spacing: -.58px;
+}
+
+.home__body--title-text {
+    font-family: sans-serif;
+    line-height: 3.95833vw;
+    font-size: 3.125vw;
+    font-weight: bold;
+    color: #1b252d;
+}
+
+
+.home__body .body--business {
+    background: url("../img/GhjagQDyvk1611559774971.png") no-repeat;
+    background-size: 100%;
+}
+
+.home__body .body--business-content {
+    display: flex;
+    border-radius: .52083vw;
+}
+
+.home__body .body--business-bg.business-img--one {
+    border-radius: .52083vw 0 0 .52083vw;
+    background: url('../img/electric-bike.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.home__body .body--business-img {
+    cursor: pointer;
+    width: 36.45833vw;
+    height: 30.05208vw;
+    position: relative;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.home__body .body--business-bg.business-img--one > div {
+    border-radius: .52083vw 0 0 .52083vw;
+}
+
+.home__body .body--business-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.5625vw;
+    color: #fff;
+    line-height: 2.1875vw;
+    position: absolute;
+    bottom: 1.66667vw;
+    left: 2.08333vw;
+    z-index: 3;
+}
+
+.anticon {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 鼠标悬停时，罩模消失 */
+.image-wrapper:hover .image-overlay {
+    opacity: 0; /* 使遮罩透明 */
+}
+
+/* 罩模的过渡效果 */
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 黑色半透明 */
+    opacity: 1; /* 初始时，遮罩可见 */
+    transition: opacity 0.3s ease; /* 平滑过渡 */
+}
+
+/* 确保容器内的图片并排对齐 */
+.image-overlay-container {
+    display: flex;
+    gap: 20px; /* 两张图片之间的间隔 */
+}
+
+.bg-body-secondary_change {
+    background-color: blue !important;
+}
+
+
