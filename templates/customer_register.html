@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta information for character set and viewport settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Share</title>
+
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+</head>
+<body>
+
+<!-- Navigation bar section -->
+<nav class="navbar navbar-expand-lg" style="background-color: #003865;">
+    <div class="container-fluid">
+        <!-- Brand logo and name with link to homepage -->
+        <a class="navbar-brand pt-2" href="{% url 'eshareauth:index' %}" style="color: white">
+            <img src="{% static 'img/brand.png' %}" class="img-fluid" style="width: 35px; height: 35px;" alt="">
+            VoltWheel Hub
+        </a>
+
+        <!-- Login and Register buttons on the right side of the navbar -->
+        <div class="text-end">
+            <!-- Link to customer login page -->
+            <a href="{% url 'eshareauth:customer_login' %}" type="button" class="btn btn-outline-primary me-2">Login</a>
+
+            <!-- Link to customer registration page -->
+            <a href="{% url 'eshareauth:customer_register' %}" type="button" class="btn btn-primary">Register as Customer</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content section containing the registration form -->
+<main class="container bg-white p-3 rounded">
+    <div style="max-width: 400px;" class="m-auto">
+        <h1>Customer Register</h1>
+
+        <!-- Display error messages if there are any -->
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Customer registration form -->
+        <form action="" method="POST">
+            {% csrf_token %}  <!-- Security token to prevent CSRF attacks -->
+
+            <!-- Input field for first name -->
+            <div class="mb-3">
+                <label>First Name</label>
+                <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                {% if form.first_name.errors %}
+                    <div class="text-danger">
+                        {% for error in form.first_name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Input field for last name -->
+            <div class="mb-3">
+                <label>Last Name</label>
+                <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                {% if form.last_name.errors %}
+                    <div class="text-danger">
+                        {% for error in form.last_name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Input field for email address -->
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Email">
+                {% if form.email.errors %}
+                    <div class="text-danger">
+                        {% for error in form.email.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Verification code input with button to request code -->
+            <div class="mb-3">
+                <label>Verification code</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="captcha" placeholder="4-digit" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="button" id="captcha-btn">Get a Verification code</button>
+                </div>
+                {% if form.captcha.errors %}
+                    <div class="text-danger">
+                        {% for error in form.captcha.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Input field for phone number with country code prefix -->
+            <div class="mb-3">
+                <label>Phone Number</label>
+                <div class="input-group">
+                    <span class="input-group-text">+44</span>
+                    <input type="tel" class="form-control" name="phone_number" id="phone_number" placeholder="Enter phone number" oninput="validatePhoneNumber()">
+                </div>
+                <div id="phone-error" class="text-danger" style="display: none;">Phone number cannot exceed 10 digits.</div>
+                {% if form.phone_number.errors %}
+                    <div class="text-danger">
+                        {% for error in form.phone_number.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Date of birth input field with placeholder for format guidance -->
+            <div class="mb-3">
+                <label for="dob">Date of Birth</label>
+                <input type="text" class="form-control" id="dob" name="dob" onblur="validateDateFormat()" placeholder="dd/mm/yyyy">
+                {% if form.dob.errors %}
+                    <div class="text-danger">
+                        {% for error in form.dob.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Password input field -->
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password" oninput="validatePasswords()">
+                {% if form.password.errors %}
+                    <div class="text-danger">
+                        {% for error in form.password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Confirm password input field to verify password consistency -->
+            <div class="mb-3">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm your password" oninput="validatePasswords()">
+                {% if form.confirm_password.errors %}
+                    <div class="text-danger">
+                        {% for error in form.confirm_password.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Error message displayed if passwords do not match -->
+            <div id="password-error" class="text-danger" style="display: none;">Passwords do not match.</div>
+
+            <!-- Deposit selection dropdown for users to select a deposit amount -->
+            <div class="mb-3">
+                <label for="deposit">Select Deposit Amount</label>
+                <select name="deposit" id="deposit" class="form-control">
+                    <option value="500">£500</option>
+                    <option value="1000">£1000</option>
+                </select>
+                {% if form.deposit.errors %}
+                    <div class="text-danger">
+                        {% for error in form.deposit.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Submit button to complete the registration -->
+            <div class="mb-3">
+                <button class="btn btn-primary w-100">Register Now</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- JavaScript files for interactivity and validation functionality -->
+<script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'bootstrap5/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/date_format.js' %}"></script>
+<script src="{% static 'js/register.js' %}"></script>
+<script src="{% static 'js/range_of_birth_date.js' %}"></script>
+<script src="{% static 'js/confirm_password.js' %}"></script>
+<script src="{% static 'js/phone_validation.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+

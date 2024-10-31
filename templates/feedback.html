@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+
+    <!-- Bootstrap CSS for styling and responsive layout -->
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+
+    <!-- JavaScript libraries for jQuery, Bootstrap JS, and Popper.js -->
+    <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
+
+    <!-- RateYo CSS for star rating -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+</head>
+<body>
+
+<!-- Header section with navigation bar -->
+<nav class="navbar navbar-expand-lg" style="background-color: #003865;">
+    <div class="container-fluid">
+        <a class="navbar-brand pt-2" href="{% url 'eshareauth:index' %}" style="color: white">
+            <img src="{% static 'img/brand.png' %}" class="img-fluid" style="width: 35px; height: 35px;" alt="">
+            VoltWheel Hub
+        </a>
+
+        <div class="text-end">
+            <div class="dropdown d-inline-block">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownLoginButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownLoginButton">
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:customer_login' %}">Customer Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:manager_login' %}">Manager Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:operator_login' %}">Operator Login</a></li>
+                </ul>
+            </div>
+            <a href="{% url 'eshareauth:customer_register' %}" type="button" class="btn btn-primary ms-2">Register</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content section -->
+<div class="container">
+    <div class="feedback-box mt-5">
+        <h3>Submit Your Feedback</h3>
+
+        <form id="feedback-form">
+            {% csrf_token %}
+
+            <!-- Rating -->
+            <div class="form-group mt-4">
+                <label>Rating:</label>
+                <div class="rating-container d-flex justify-content-center">
+                    <div id="rateYo"></div>
+                </div>
+                <p class="rating-text">Ranking: <span id="ratingValue">1</span></p>
+            </div>
+
+            <!-- Comment Input -->
+            <div class="form-group mt-3">
+                <label for="comment-content">Comment:</label>
+                <textarea id="comment-content" name="comment" class="form-control" rows="4" placeholder="Please enter your comment"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="button" onclick="submitFeedback()" class="btn btn-success mt-3">Submit</button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript libraries and star rating plugin -->
+<script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+<script>
+    $(function () {
+        $("#rateYo").rateYo({
+            rating: 1,
+            fullStar: true,
+            starWidth: "40px"
+        }).on("rateyo.set", function (e, data) {
+            var rating = data.rating;
+            $('#ratingValue').text(rating);
+        });
+    });
+
+    function submitFeedback() {
+        let comment = $('#comment-content').val();
+        let rating = $('#ratingValue').text();
+
+        $.ajax({
+            url: '{% url "feedback" rental_id %}',
+            type: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            data: {
+                'comment': comment,
+                'rating': rating
+            },
+            success: function (response) {
+                alert("Thank you for your feedback!");
+                setTimeout(function(){
+                    window.location.href = '/';
+                }, 2000);
+            },
+            error: function () {
+                alert("Failed to submit feedback, please try again.");
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

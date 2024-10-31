@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'loginPage',
+    'eshareauth'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'evss.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / '../../electricshare/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+             # here to load
+            'builtins':['django.templatetags.static']
         },
     },
 ]
@@ -76,9 +80,9 @@ WSGI_APPLICATION = 'evss.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
+        "NAME": "electricshare",
         "USER": "postgres",
-        "PASSWORD": "admin",
+        "PASSWORD": "123456",
         "HOST": "localhost",
         "PORT": "5432",
     }
@@ -120,8 +124,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# static file load path
+STATICFILES_DIRS = [
+    BASE_DIR / '../../electricshare/static'
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configuration for sending emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '386786676dong@gmail.com' # Replace with the mail number to be used
+EMAIL_HOST_PASSWORD = 'qmug xsli ymub voxy' # Replace application-specific passwords with mail-generated ones
+DEFAULT_FROM_EMAIL = '386786676dong@gmail.com'
+
+# Use cookie-based sessions instead of database sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'

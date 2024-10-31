@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta charset for defining character encoding and document title -->
+    <meta charset="UTF-8">
+    <title>Operator Login - E-Share</title>
+
+    <!-- Bootstrap CSS for styling and layout -->
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+
+    <!-- JavaScript libraries for jQuery, Bootstrap, and Popper.js functionality -->
+    <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
+
+    <!-- Custom JavaScript for message alerts -->
+    <script src="{% static 'js/message_alert.js' %}"></script>
+</head>
+<body>
+
+<!-- Header section with navigation bar -->
+<nav class="navbar navbar-expand-lg" style="background-color: #003865;">
+    <div class="container-fluid">
+        <!-- Left-aligned brand logo linking to the homepage -->
+        <a class="navbar-brand pt-2" href="{% url 'eshareauth:index' %}" style="color: white">
+            <img src="{% static 'img/brand.png' %}" class="img-fluid" style="width: 35px; height: 35px;" alt="">
+            VoltWheel Hub
+        </a>
+
+        <!-- Right-aligned login dropdown and register button -->
+        <div>
+            <!-- Dropdown menu for different login options (Customer, Manager, Operator) -->
+            <div class="dropdown d-inline-block">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownLoginButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownLoginButton">
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:customer_login' %}">Customer Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:manager_login' %}">Manager Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:operator_login' %}">Operator Login</a></li>
+                </ul>
+            </div>
+
+            <!-- Register button linking to customer registration page -->
+            <a href="{% url 'eshareauth:customer_register' %}" type="button" class="btn btn-primary ms-2">Register</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content area for the operator login form -->
+<main class="container bg-white p-3 rounded">
+    <div style="max-width: 330px;" class="m-auto">
+        <!-- Page title for the login form -->
+        <h1>Operator Login</h1>
+
+        <!-- Display any error messages if login fails -->
+        {% if messages %}
+            <div id="error-message">
+                {% for message in messages %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Operator login form -->
+        <form action="" method="POST">
+            {% csrf_token %}
+            <!-- Email input field -->
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" placeholder="email">
+            </div>
+
+            <!-- Password input field -->
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control" placeholder="password">
+            </div>
+
+            <!-- "Remember me" checkbox to keep the session active -->
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" name="remember" value="1" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Remember me
+                </label>
+            </div>
+
+            <!-- Submit button to log in -->
+            <div class="mb-3">
+                <button class="btn btn-primary w-100">Sign in now</button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
