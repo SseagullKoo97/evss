@@ -3,6 +3,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils import timezone
+from eshareauth.models import Customer,Wallet
 # 站点表
 class Station(models.Model):
     station_id = models.AutoField(primary_key=True)
@@ -61,34 +62,34 @@ class VehiclePricing(models.Model):
         db_table = 'vehicle_pricing'
 
 
-class Wallet(models.Model):
-    wallet_id = models.AutoField(primary_key=True)  # 等同于 SERIAL PRIMARY KEY
-    customer_id = models.IntegerField(unique=True,null=False)   # customer_id 的唯一约束
-    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # 十进制字段
-    payment_method = models.CharField(max_length=50, blank=True, null=True)  # VARCHAR(50)
-    payment_time = models.DateTimeField(blank=True, null=True)  # TIMESTAMP
-
-    class Meta:
-        db_table = 'wallet'  # 指定数据库表名（可选）
-    def __str__(self):
-        return f"Wallet {self.wallet_id}"
+# class Wallet(models.Model):
+#     wallet_id = models.AutoField(primary_key=True)  # 等同于 SERIAL PRIMARY KEY
+#     customer_id = models.IntegerField(unique=True,null=False)   # customer_id 的唯一约束
+#     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)  # 十进制字段
+#     payment_method = models.CharField(max_length=50, blank=True, null=True)  # VARCHAR(50)
+#     payment_time = models.DateTimeField(blank=True, null=True)  # TIMESTAMP
+#
+#     class Meta:
+#         db_table = 'wallet'  # 指定数据库表名（可选）
+#     def __str__(self):
+#         return f"Wallet {self.wallet_id}"
 
 
 #顾客表
-class Customer(models.Model):
-    customer_id = models.AutoField(primary_key=True)
-    customer_name = models.CharField(max_length=50,null=False)
-    dateofbirth = models.DateField(null=False)
-    customer_password = models.CharField(max_length=255,null=False)
-    email = models.EmailField(max_length=100, unique=True,null=False)
-    customer_number = models.CharField(max_length=12,null=True)
-    wallet_id = models.ForeignKey(Wallet, on_delete=models.SET_NULL,null=True,blank=True,db_column='wallet_id')
-    created_time = models.DateTimeField(default=timezone.now)
+# class Customer(models.Model):
+#     customer_id = models.AutoField(primary_key=True)
+#     customer_name = models.CharField(max_length=50,null=False)
+#     dateofbirth = models.DateField(null=False)
+#     customer_password = models.CharField(max_length=255,null=False)
+#     email = models.EmailField(max_length=100, unique=True,null=False)
+#     customer_number = models.CharField(max_length=12,null=True)
+#     wallet_id = models.ForeignKey(Wallet, on_delete=models.SET_NULL,null=True,blank=True,db_column='wallet_id')
+#     created_time = models.DateTimeField(default=timezone.now)
 
-    class Meta:
-        db_table = 'customer'
-    def __str__(self):
-        return f"Customer {self.customer_id}"
+    # class Meta:
+    #     db_table = 'customer'
+    # def __str__(self):
+    #     return f"Customer {self.customer_id}"
 
 
 

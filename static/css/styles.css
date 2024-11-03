@@ -1,0 +1,36 @@
+/* styles.css */
+body {
+    background-color: #f0f2f5;  /* 设置背景颜色 */
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 给卡片添加阴影 */
+    border-radius: 10px;  /* 卡片的圆角 */
+    border: none;  /* 移除卡片边框 */
+}
+
+.card-title {
+    margin-bottom: 20px;  /* 标题的下方留空 */
+}
+
+#login-message {
+    text-align: center;  /* 错误消息居中显示 */
+}
+
+.btn-primary {
+    background-color: #007bff;  /* 按钮主色 */
+    border: none;  /* 移除按钮边框 */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;  /* 鼠标悬停时的按钮颜色 */
+}
+
+/* 新增部分 - 调整登录和注册按钮的样式 */
+.login-btn {
+    margin-right: 75px;  /* 向左移动Login按钮 */
+}
+
+.register-btn {
+    margin-right: 75px;  /* 向左移动Register按钮 */
+}

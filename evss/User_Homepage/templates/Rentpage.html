@@ -8,10 +8,141 @@
 
 </head>
 <body>
-<link rel="stylesheet" href="../static/plugins/bootstrap-5.3.3-dist/css/bootstrap.css">
-<script src="../static/js/jquery-3.7.1.min.js"></script>
-<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../static/css/styles.css">
+{#<link rel="stylesheet" href="../static/plugins/bootstrap-5.3.3-dist/css/bootstrap.css">#}
+{#<script src="../static/js/jquery-3.7.1.min.js"></script>#}
+{#<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>#}
+{#<link rel="stylesheet" href="../static/css/styles.css">#}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+{#<script src="../static/js/jquery-3.7.1.min.js"></script>#}
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+{#<script src="../static/plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>#}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{#<link rel="stylesheet" href="../static/css/styles.css">#}
+<style>
+    .home__banner .banner__text--green {
+    color: #00d9b2;
+}
+
+.home__banner--text {
+    color: #e5e6e7;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 4.58333vw;
+    line-height: 5.72917vw;
+}
+
+.home__body--title {
+    margin-bottom: 3.75vw;
+}
+
+.home__body--title-sub {
+    font-family: sans-serif;
+    font-size: 1.66667vw;
+    font-weight: 400;
+    color: #19252e;
+    letter-spacing: -.58px;
+}
+
+.home__body--title-text {
+    font-family: sans-serif;
+    line-height: 3.95833vw;
+    font-size: 3.125vw;
+    font-weight: bold;
+    color: #1b252d;
+}
+
+
+.home__body .body--business {
+    background: url("../img/GhjagQDyvk1611559774971.png") no-repeat;
+    background-size: 100%;
+}
+
+.home__body .body--business-content {
+    display: flex;
+    border-radius: .52083vw;
+}
+
+.home__body .body--business-bg.business-img--one {
+    border-radius: .52083vw 0 0 .52083vw;
+    background: url('../img/electric-bike.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.home__body .body--business-img {
+    cursor: pointer;
+    width: 36.45833vw;
+    height: 30.05208vw;
+    position: relative;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.home__body .body--business-bg.business-img--one > div {
+    border-radius: .52083vw 0 0 .52083vw;
+}
+
+.home__body .body--business-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.5625vw;
+    color: #fff;
+    line-height: 2.1875vw;
+    position: absolute;
+    bottom: 1.66667vw;
+    left: 2.08333vw;
+    z-index: 3;
+}
+
+.anticon {
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 鼠标悬停时，罩模消失 */
+.image-wrapper:hover .image-overlay {
+    opacity: 0; /* 使遮罩透明 */
+}
+
+/* 罩模的过渡效果 */
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 黑色半透明 */
+    opacity: 1; /* 初始时，遮罩可见 */
+    transition: opacity 0.3s ease; /* 平滑过渡 */
+}
+
+/* 确保容器内的图片并排对齐 */
+.image-overlay-container {
+    display: flex;
+    gap: 20px; /* 两张图片之间的间隔 */
+}
+
+.bg-body-secondary_change {
+    background-color: blue !important;
+}
+
+
+
+</style>
 
 <!--导航栏-->
 <nav class="navbar navbar-expand-lg" style="background-color: #003865;">
@@ -28,11 +159,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 pt-2 pb-2 justify-content-center w-100 d-flex">
                 <li class="nav-item ps-md-5">
-                    <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}"
+                    <a class="nav-link active" aria-current="page" href="{% url 'User_Homepage:homepage' %}"
                        style="color: white">Home</a>
                 </li>
                 <li class="nav-item ps-md-5">
-                    <a class="nav-link" href="{% url 'rent_page' %}" style="color: white">Vehicles Rent</a>
+                    <a class="nav-link" href="{% url 'User_Homepage:rent_page' %}" style="color: white">Vehicles Rent</a>
                 </li>
                 <li class="nav-item ps-md-5">
                     <a class="nav-link" href="#" style="color: white">About us</a>
@@ -173,7 +304,7 @@
                                                     </button>
                                                     <!-- 修改后可添加功能处理的按钮 -->
                                                     <button type="button" class="btn btn-primary confirm-rent"
-                                                            onclick="window.location.href='{% url 'time_page' %}'"
+                                                            onclick="window.location.href='{% url 'User_Homepage:time_page' %}'"
                                                     data-vehicle-id="{{ vehicle.vehicle_id }}">
                                                         Yes
                                                     </button>
@@ -201,7 +332,7 @@
         const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');  // 获取 CSRF token
 
         // 发送 AJAX 请求到后端更新车辆状态
-        fetch(`/rent_vehicle/${vehicleId}/`, {
+        fetch(`/auth/rent_vehicle/${vehicleId}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -236,7 +367,7 @@
             const vehicleId = this.getAttribute('data-vehicle-id');  // 获取车辆 ID
             const csrftoken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            fetch(`/create_rental/`, {
+            fetch(`/auth/create_rental/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -248,7 +379,7 @@
             .then(data => {
                 if (data.status === 'success') {
                     alert('Rental created successfully!');
-                    window.location.href = "{% url 'time_page' %}";
+                    window.location.href = "{% url 'User_Homepage:time_page' %}";
                 } else {
                     alert('Failed to create rental: ' + data.message);
                 }

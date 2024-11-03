@@ -6,4 +6,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("You are in Login page!!")
+    return render(request, 'index.html')

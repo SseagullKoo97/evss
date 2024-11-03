@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta information for character set and viewport settings -->
+    <meta charset="UTF-8">
+    <title>E-Share</title>
+
+    <!-- Bootstrap CSS for styling and responsive layout -->
+    <link rel="stylesheet" href="{% static 'bootstrap5/bootstrap.min.css' %}">
+
+    <!-- JavaScript libraries for jQuery, Bootstrap JS, and Popper.js -->
+    <script src="{% static 'jquery/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/popper.min.js' %}"></script>
+    <script src="{% static 'bootstrap5/bootstrap.min.js' %}"></script>
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<!-- Header section with navigation bar -->
+<nav class="navbar navbar-expand-lg" style="background-color: #003865;">
+    <div class="container-fluid">
+        <!-- Logo and homepage link on the left side of the navigation bar -->
+        <a class="navbar-brand pt-2" href="{% url 'eshareauth:index' %}" style="color: white">
+            <!-- Brand logo image, sized appropriately -->
+            <img src="{% static 'img/brand.png' %}" class="img-fluid" style="width: 35px; height: 35px;" alt="">
+            VoltWheel Hub
+        </a>
+
+        <!-- Right-aligned section containing Login and Register options -->
+        <div class="text-end">
+            <!-- Dropdown menu for Login options -->
+            <div class="dropdown d-inline-block">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownLoginButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    Login
+                </button>
+                <!-- Dropdown menu with links to different login pages for customer, manager, and operator -->
+                <ul class="dropdown-menu" aria-labelledby="dropdownLoginButton">
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:customer_login' %}">Customer Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:manager_login' %}">Manager Login</a></li>
+                    <li><a class="dropdown-item" href="{% url 'eshareauth:operator_login' %}">Operator Login</a></li>
+                </ul>
+            </div>
+
+            <!-- Register button, linking directly to the customer registration page -->
+            <a href="{% url 'eshareauth:customer_register' %}" type="button" class="btn btn-primary ms-2">Register</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content section -->
+<div class="container">
+    <!-- Welcome heading for the main page -->
+    <h1>Welcome to E-Share</h1>
+</div>
+
+</body>
+</html>
+
+
+

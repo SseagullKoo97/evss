@@ -84,14 +84,16 @@ def drop_vehicle(request, vehicle_id):
 #@login_required
 #@csrf_exempt
 def create_rental(request):
+    print("is in -------------------")
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
             print("Request data:", data)
             vehicle_id = data.get('vehicle_id')
             print("Vehicle ID:", vehicle_id)
-            customer = get_object_or_404(models.Customer, customer_id=1)
-            print("Customer ID:", customer.customer_id)
+            customer_id = request.session.get('customer_id')
+            customer = get_object_or_404(models.Customer, customer_id=customer_id)
+            print("Customer ID:", customer_id)
 
             # 获取车辆对象和当前用户的起始站点信息
             vehicle = models.Vehicle.objects.get(vehicle_id=vehicle_id)

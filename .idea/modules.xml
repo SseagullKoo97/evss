@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/PGD.iml" filepath="$PROJECT_DIR$/.idea/PGD.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/electricshare.iml" filepath="$PROJECT_DIR$/.idea/electricshare.iml" />
+>>>>>>> xind
     </modules>
   </component>
 </project>
